@@ -46,37 +46,24 @@ const recipes = [
 			'Wait, put them out',
 			'Add some salt on it',
 		],
-		id: 1596168522409,
+		id: 1596168523409,
 	},
 ];
 const container = document.querySelector('.container');
 
-//<p>Ingredients: ${recipe.ingredients}</p>
-//<p>${recipe.steps}</p>
 
 const renderCard = () => {
 	// check the recipes collection
-	recipes.map(recipe=>{
-		console.log (
-			recipe.title,
-			recipe.picture,
-			recipe.author,
-			recipe.difficulty,
-			recipe.timing,
-			recipe.ingredients,
-			recipe.steps,
-			recipe.id,
-		)
-	});
+	
 	
 	container.innerHTML = recipes.map(recipe => 
-		`<div class="card" data_id="${recipe.id}">
-		  <h1>${recipe.title}</h1>
+		`<div class="card" data-id="${recipe.id}">
+		  <h1 class="${recipe.title}">${recipe.title}</h1>
 		  <img src="${recipe.picture}" alt="recipe img" width="400" height="300">
-		  <h2>${recipe.author}</h2>
+		  <h2 class="${recipe.author}">${recipe.author}</h2>
 		  <div class="align">
-			<span>Difficulty: ${recipe.difficulty}</span>
-			<span>Duration: ${recipe.timing}</span>
+			<span class="${recipe.difficulty}">Difficulty: ${recipe.difficulty}</span>
+			<p class="${recipe.timing}">Duration: ${recipe.timing}</p>
 		  </div>
 		  <button class="info_btn">More info</button>
 		</div>`
@@ -86,44 +73,46 @@ const renderCard = () => {
 	// put it in the DOM
 };
 
-const card = document.querySelectorAll('.card');
+const outerModal = document.querySelector('.outer');
+const innerModal = document.querySelector('.inner');
 
-const handleMoreInfo = (event) => {
-	// recipes.map(recipe=>{
-	// 	console.log (
-	// 		recipe.title,
-	// 		recipe.picture,
-	// 		recipe.author,
-	// 		recipe.difficulty,
-	// 		recipe.timing,
-	// 		recipe.ingredients,
-	// 		recipe.steps,
-	// 	)
-	// });
-	// container.innerHTML = recipes.map(recipe => 
-	// 	`<div class="modal">
-	// 	  <h1>${recipe.title}</h1>
-	// 	  <img src="${recipe.picture}" alt="recipe img" width="400" height="300">
-	// 	  <h2>${recipe.author}</h2>
-	// 	  <div class="align">
-	// 		<span>Difficulty: ${recipe.difficulty}</span>
-	// 		<span>Duration: ${recipe.timing}</span>
-	// 	  </div>
-	// 	  <p>Ingredients: ${recipe.ingredients}</p>
-	// 	  <p>Steps: ${recipe.steps}</p>
-	// 	</div>`
-	// ).join('')
-	// card.classList.add('hide');
-	if (event.target.matches('button.info_btn')) {
-		const parent = event.target.closest('.card');
-		const id = parent.closest.id;
-		const findRecipe = recipes.find(singleRecipe => singleRecipe.id = id);
+
+const openModal = (e) => {
+	outerModal.classList.add('open');
 	};
 
+	
+const handleMoreInfo = (event) => {
+	if (event.target.matches('button.info_btn')) {
+    	const card = event.target.closest('.card');
+		const id = Number(card.dataset.id);
+		const findRecipe = recipes.find(singleRecipe => singleRecipe.id = id);
+		const titleInfo = card.querySelector('h1').textContent;
+		const imgInfo = card.querySelector('img').src;
+		const authorInfo = card.querySelector('h2').textContent;
+		const difficultyInfo = card.querySelector('span').textContent;
+		const timingInfo = card.querySelector('p').textContent;
+		for (let i = 0; i < recipes.length; i++) {
+		innerModal.innerHTML =
+			`<div class="modal" data-id="${id}">
+			  <h1>${titleInfo}</h1>
+			  <img src="${imgInfo}" alt="recipe img" width="365" height="300">
+			  <h2>${authorInfo}</h2>
+			  <div class="align">
+				<span>${difficultyInfo}</span>
+				<span>${timingInfo}</span>
+			  </div>
+			  <p>Ingredients: ${recipes[i].ingredients}</p>
+			  <p>Steps: ${recipes[i].steps}</p>
+			</div>`
+		openModal(findRecipe);
+	}
+}
 };
 
 const generateButton = document.querySelector('button.generate');
 generateButton.addEventListener('click', renderCard);
 
-const infoBtn = document.querySelectorAll('.info_btn');
-infoBtn.forEach(button => button.addEventListener('click', handleMoreInfo));
+window.addEventListener('click', handleMoreInfo);
+// const infoBtns = document.querySelectorAll('button.info_btn');
+// infoBtns.forEach(button => button.addEventListener('click', handleMoreInfo));
