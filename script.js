@@ -3,7 +3,7 @@ console.log('HELLO');
 const recipes = [
 	{
 		title: 'Pan cake',
-		picture: 'https://bit.ly/2ZXyiKI',
+		picture: 'https://www.recipetineats.com/wp-content/uploads/2017/06/Pancakes-SQ.jpg',
 		author: 'Jerome',
 		difficulty: 'medium',
 		timing: '45',
@@ -35,7 +35,7 @@ const recipes = [
 	},
 	{
 		title: 'My recipe',
-		picture: 'https://bit.ly/2ZXyiKI',
+		picture: 'https://i.pinimg.com/originals/20/5c/64/205c645543c01ef8938e7258fadddac6.jpg',
 		author: 'Jay',
 		difficulty: 'easy',
 		timing: '15',
@@ -132,3 +132,7 @@ const generateButton = document.querySelector('button.generate');
 generateButton.addEventListener('click', renderCard);
 
 window.addEventListener('click', handleMoreInfo);
+
+
+// Form
+
