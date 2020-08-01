@@ -110,9 +110,25 @@ const handleMoreInfo = (event) => {
 }
 };
 
+const closeModal = () => {
+    outerModal.classList.remove('open');
+}
+
+outerModal.addEventListener('click', event => {
+    event.target;
+    const isOutside = !event.target.closest('.inner');
+    if (isOutside) {
+        closeModal();
+    }
+});
+
+window.addEventListener('keydown', event => {
+    if (event.key === "Escape") {
+        closeModal();
+    }
+});
+
 const generateButton = document.querySelector('button.generate');
 generateButton.addEventListener('click', renderCard);
 
 window.addEventListener('click', handleMoreInfo);
-// const infoBtns = document.querySelectorAll('button.info_btn');
-// infoBtns.forEach(button => button.addEventListener('click', handleMoreInfo));
