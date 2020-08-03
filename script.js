@@ -135,4 +135,67 @@ window.addEventListener('click', handleMoreInfo);
 
 
 // Form
+const handleAddRecipesForm = () => {
+	innerModal.innerHTML = `
+<form action="" class="form">
+	<p>What's the recipe name?</p>
+	<input
+		class="input-form"
+		type="text"
+		id="recipe_name"
+		name="recipe_name"
+		placeholder="Enter your recipe name here"
+		required
+	/>
 
+	<p>Picture of the result (URL)</p>
+	<input type="file" class="input-form" id="recipe_url" name="recipe_url" accept="image/png, image/jpeg">
+
+	<p>Who's the cook?</p>
+	<input type="text" class="input-form" id="recipe_cook" name="recipe_cook" required>
+
+	<p>What's the difficulty?</p>
+	<select name="difficulty" id="difficulty" class="select-form" required>
+		<option value="easy">Easy</option>
+		<option value="medium">Medium</option>
+		<option value="hard">Hard</option>
+	</select>
+
+	<p>How much time does it take?</p>
+	<select name="duration" id="duration" class="select-form" required>
+		<option value="less15">Less than 15 minutes</option>
+		<option value="15min">15 minutes</option>
+		<option value="30min">30 minutes</option>
+		<option value="45min">45 minutes</option>
+		<option value="60min">60 minutes</option>
+		<option value="more1h">More than an hour</option>
+	</select>
+
+	<p>Ingredients</p>
+	<ul class="ingredient_wraper">
+		
+	</ul>
+	<input type="text" class="input-form ingredient" id="recipe_ingredient" name="recipe_ingredient" required>
+	<button class="btn_add--ingredient">Add a new ingredient to the list</button>
+
+	<p>Steps</p>
+	<ul class="step_wraper">
+		
+	</ul>
+	<input type="text" class="input-form step" id="recipe_step" name="recipe_step" required>
+	<button class="btn_add--step">Add a new ingredient to the list</button>
+
+	<button class="btn_submit">Submit</button>
+</form>
+
+`;
+openModal();
+
+}
+
+
+
+const addRecipesBtn = document.querySelector('.add_recipe');
+console.log(addRecipesBtn);
+
+addRecipesBtn.addEventListener('click', handleAddRecipesForm);
