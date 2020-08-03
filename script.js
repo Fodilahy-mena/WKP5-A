@@ -48,6 +48,21 @@ const recipes = [
 		],
 		id: 1596168523409,
 	},
+	{
+		title: 'Mofo dangitra',
+		picture: 'https://www.mamina.org/sites/default/files/styles/original_watermark/public/mofo%20mangahazo.jpg?itok=k0pqqcFG',
+		author: 'Milien',
+		difficulty: 'easy',
+		timing: '30',
+		ingredients: ['cassava', 'sugar', 'water'],
+		steps: [
+			'Put a pan on the fire',
+			'Crack the eggs on it',
+			'Wait, put them out',
+			'Add some salt on it',
+		],
+		id: 1596168523400,
+	},
 ];
 const container = document.querySelector('.container');
 
@@ -91,6 +106,7 @@ const handleMoreInfo = (event) => {
 		const authorInfo = card.querySelector('h2').textContent;
 		const difficultyInfo = card.querySelector('span').textContent;
 		const timingInfo = card.querySelector('p').textContent;
+		
 		for (let i = 0; i < recipes.length; i++) {
 		innerModal.innerHTML =
 			`<div class="modal" data-id="${id}">
@@ -98,11 +114,23 @@ const handleMoreInfo = (event) => {
 			  <img src="${imgInfo}" alt="recipe img" width="365" height="300">
 			  <h2>${authorInfo}</h2>
 			  <div class="align">
-				<span>${difficultyInfo}</span>
-				<span>${timingInfo}</span>
+			  	<ul>
+					<li>${difficultyInfo}</li>
+				</ul>
+				<ul>
+					<li>${timingInfo}</li>
+				</ul>
 			  </div>
-			  <p>Ingredients: ${recipes[i].ingredients}</p>
-			  <p>Steps: ${recipes[i].steps}</p>
+			  <section>
+				<ol>
+				Ingredients:
+					${recipes[i].ingredients.map(ingr => `<li>${ingr}</li>`).join('')}
+				</ol>
+				<ol>
+				  Steps:
+			  		${recipes[i].steps.map(step => `<li>${step}</li>`).join('')}
+				</ol>
+			  </section>
 			</div>`
 		openModal(findRecipe);
 	}
@@ -148,7 +176,7 @@ const handleAddRecipesForm = () => {
 	/>
 
 	<p>Picture of the result (URL)</p>
-	<input type="file" class="input-form" id="recipe_url" name="recipe_url" accept="image/png, image/jpeg">
+	<input type="url" class="input-form" id="recipe_url" name="recipe_url" accept="image/png, image/jpeg">
 
 	<p>Who's the cook?</p>
 	<input type="text" class="input-form" id="recipe_cook" name="recipe_cook" required>
