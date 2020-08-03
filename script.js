@@ -55,7 +55,6 @@ const container = document.querySelector('.container');
 const renderCard = () => {
 	// check the recipes collection
 	
-	
 	container.innerHTML = recipes.map(recipe => 
 		`<div class="card" data-id="${recipe.id}">
 		  <h1 class="${recipe.title}">${recipe.title}</h1>
